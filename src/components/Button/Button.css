@@ -15,7 +15,7 @@
   background-color: rgba(248, 248, 248, 1);
 }
 
-.movies-button__more {
+.button__movies {
   width: 320px;
   height: 36px;
   margin: 55px auto 79px auto;
@@ -30,7 +30,7 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.button__saved-profile {
+.button__profile {
   width: 410px;
   height: 45px;
   margin-bottom: 50px;
@@ -62,13 +62,13 @@
 }
 
 @media screen and (min-width: 721px) and (max-width: 869px) {
-  .movies-button__more {
+  .button__movies {
     margin-top: 44px;
   } 
 }
 
 @media screen and (min-width: 320px) and (max-width: 720px) {
-  .movies-button__more {
+  .button__movies {
     width: 240px;
     margin-top: 61px;
     
@@ -76,7 +76,7 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 519px) {
-  .button__saved-profile {
+  .button__profile {
     width: 260px;
   }
   .button__auth {

@@ -8,20 +8,20 @@ function Navigation(props) {
  // отрисовка компонентов навигации
   return (
 
-    <div className={`nav-${props.name}`}>
+    <div className={`nav nav__${props.name}`}>
 
       {props.children}
 
-      <div className={`nav__container nav-${props.name}__container`}>
+      <div className={`nav__container nav__container-${props.name}`}>
         
-        <Link className={`nav-${props.name}__link_display_none ${props.loginIn ? 'nav__link_visibility_hidden' : 'nav__link'}`} to='/signup'>Регистрация</Link>
+        <Link className={`nav__link-${props.name}_display_none ${props.loginIn ? 'nav__link_visibility_hidden' : 'nav__link'}`} to='/signup'>Регистрация</Link>
         
         <button className={`nav__btn ${props.btnName}`} 
         onClick={props.nav}>
           
           <img className={props.loginIn ? 'nav__btn-img' : 'nav__btn-img_display_none'} src={navLogo} alt="иконка кнопки" />
           
-          <span className={`nav__btn-text nav-${props.name}__btn-text`}>
+          <span className={`nav__btn-text nav__btn-${props.name}-text`}>
             {props.btnText}
           </span>
           

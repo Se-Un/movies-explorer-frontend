@@ -9,7 +9,7 @@ function MenuBurger(props) {
   // использовать useNavigate
   const navigate = useNavigate();
   // константа активной ссылки
-  const setActive = ({isActive}) => isActive ? 'nav__link nav-burger__link_active' : 'nav__link nav-burger__link';
+  const setActive = ({isActive}) => isActive ? 'nav__link nav__link-burger_active' : 'nav__link nav__link-burger';
   // функция закртыия меню
   const handleCloseMenu = () => {
     props.setOpen(false);
@@ -29,19 +29,19 @@ function MenuBurger(props) {
 
         <Navigation
         name='burger'
-        btnName='nav-burger__btn'
+        btnName='nav__btn-burger'
         btnText='Aккаунт'
         loginIn={props.loggedIn} 
         location={props.location}
         nav={handleNavProfile}
         openBurgerMenu=''
-        classBurger='nav-burger__btn_display_none' 
+        classBurger='nav__btn-burger_display_none' 
         >
-          <nav className='nav-burger__links' onClick={handleCloseMenu}>
+          <nav className='nav__links-burger' onClick={handleCloseMenu}>
             {
               links.map((link, index) => 
                 <NavLink className={setActive} to={link.href} key={index}>
-                  <p className='nav-burger__link-text'>{link.text}</p>
+                  <p className='nav__link-text-burger'>{link.text}</p>
                 </NavLink>
               )
             }

@@ -15,57 +15,63 @@ function Profile (props) {
   }
 
   return (
+
     <main className='profile'>
 
-      <h1 className='profile__title'>
-        {`Привет, ${props.name}!`}
-      </h1>
+      <section className='profile__section'>
 
-      <PopupWithForm
-        form='profile'
-        saveBtnOpen={saveOpen}
-        click={handleClickEdit}
-        path={props.locate}
-        save='Сохранить'
-        edit='Редактировать'
-        logout='Выйти из системы'
-      >
+        <h1 className='profile__title'>
+          {`Привет, ${props.name}!`}
+        </h1>
 
-        <label className='popup__label-profile'>
+        <PopupWithForm
+          form='profile'
+          saveBtnOpen={saveOpen}
+          click={handleClickEdit}
+          path={props.locate}
+          save='Сохранить'
+          edit='Редактировать'
+          logout='Выйти из системы'
+        >
 
-          <span className='popup__span-profile'>Имя</span>
+          <label className='popup__label-profile'>
 
-          <input 
-            className='popup__input-profile' 
-            type="text" 
-            placeholder='Виталий' 
-            minLength="2" 
-            maxLength="30" 
-            required 
-            disabled={disable} 
-          />
+            <span className='popup__span-profile'>Имя</span>
 
-        </label>
+            <input 
+              className='popup__input-profile' 
+              type="text" 
+              placeholder='Виталий' 
+              minLength="2" 
+              maxLength="30" 
+              required 
+              disabled={disable} 
+            />
 
-        <div className='popup__line-profile'></div>
+          </label>
 
-        <label className='popup__label-profile popup__label-profile_margin_top'>
+          <div className='popup__line-profile'></div>
 
-          <span className='popup__span-profile'>E-mail</span>
+          <label className='popup__label-profile popup__label-profile_margin_top'>
 
-          <input 
-            className='popup__input-profile' 
-            type="email"
-            placeholder="pochta@yandex.ru" 
-            required 
-            disabled={disable} 
-          />
+            <span className='popup__span-profile'>E-mail</span>
 
-        </label>
+            <input 
+              className='popup__input-profile' 
+              type="email"
+              placeholder="pochta@yandex.ru" 
+              required 
+              disabled={disable} 
+            />
 
-      </PopupWithForm>
+          </label>
 
-  </main>
+        </PopupWithForm>
+
+      </section>
+
+    </main>
+
   )
   
 }

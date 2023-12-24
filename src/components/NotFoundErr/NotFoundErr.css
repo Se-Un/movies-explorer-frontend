@@ -45,7 +45,7 @@
 
 @media screen and (min-width: 520px) and (max-width: 768px) {
   .not-found__title {
-    margin: 408px 0 222px 0;
+    margin: 408px 0 0 0;
   }
 }
 

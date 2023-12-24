@@ -11,7 +11,7 @@ function PopupWithForm(props) {
 
         return props.saveBtnOpen ?
 
-          <Button name={`button__saved-${props.form}`} text={props.save} />
+          <Button name={`button__${props.form}`} text={props.save} />
           :
           <div className={`popup__btn-container-${props.form}`}>
 
@@ -48,13 +48,13 @@ function PopupWithForm(props) {
 
   return (
 
-      <form className={`popup popup-${props.form}`} action="">
+      <form className={`popup popup__${props.form}`} action="">
 
         {
           props.children
         }
 
-        <div className={`popup__container popup__container-${props.form}`}>
+        <div className={`popup__container popup__container-${props.form} popup__container-${props.page}_margin_top`}>
           
           <p className={props.saveBtnOpen ? 'popup__error-message' : 'popup__error-message_display_none'}>{props.errText}</p>
 

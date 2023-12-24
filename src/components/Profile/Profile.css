@@ -1,10 +1,13 @@
 .profile {
   width: 100%;
-  height: 626px;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.profile__section {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(255, 255, 255, 1);
 }
 
 .profile__title {
@@ -16,7 +19,7 @@
 }
 
 @media screen and (min-width: 520px) and (max-width: 768px) {
-  .profile {
+  .profile__section {
     padding-top: 162px;
   }
   .profile__title {

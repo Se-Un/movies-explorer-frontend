@@ -1,6 +1,10 @@
 .registry {
   width: 100%;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.registry__section {
+  width: 100%;
   display: flex;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 1);
 }

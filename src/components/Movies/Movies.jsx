@@ -30,7 +30,7 @@ function Movies() {
 
       </MoviesCardList>
 
-      <Button name='movies-button__more' text='Ещё' />
+      <Button name='button__movies' text='Ещё' />
 
     </main>
   )
