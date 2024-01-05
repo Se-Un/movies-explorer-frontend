@@ -1,61 +1,107 @@
 // импорт структурных файлов
 import './Registry.css';
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
-
+import { useValidation } from '../../hooks/Validation/useValidation';
+import Preloader from '../Preloader/Preloader';
+// компонент регистрации
 function Registry (props) {
+  // деструктуризация переменных из хука валидации
+  const { values, handleChange, errors, resetForm, isValid } = useValidation();
+  // функция обработчик сабмита
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    props.onRegistry(values.regName, values.regEmail, values.regPass);
+    resetForm();
+  }
+  // отрисовка компонента Registry
   return (
+
     <main className="registry">
 
-      <section className='registry__section'>
+      {
 
-        <PopupWithForm form='auth' path={props.locate}>
-        
-          <div className='popup__labels-auth'>
+        props.load ? <Preloader /> :
 
-            <label className='popup__label-auth'>
-            
-              <span className='popup__span-auth'>Имя</span>
-            
-              <input 
-                className='popup__input-auth' 
-                type="text"
-                placeholder='Виталий'
-                minLength="2"
-                maxLength="30"
-                required 
-              />
-            
-            </label>
+        <section className='registry__section'>
 
-            <label className='popup__label-auth'>
-            
-              <span className='popup__span-auth'>E-mail</span>
+          <PopupWithForm 
+            form='auth' 
+            path={props.locate} 
+            onSubmit={handleSubmit}  
+            valid={isValid}
+            message={props.message}
+          >
 
-              <input 
-                className='popup__input-auth popup__input-auth_letter_spacing' type="email"
-                placeholder="pochta@yandex.ru"
-                required 
-              />
+            <div className='popup__labels-auth'>
 
-            </label>
+              <label className='popup__label-auth'>
+    
+                <span className='popup__span-auth'>Имя</span>
+    
+                <input 
+                  className='popup__input-auth'
+                  type="text"
+                  name='regName' 
+                  placeholder='Введите ваше имя'
+                  minLength={2}
+                  maxLength={30}
+                  required={true}
+                  value={values.regName || ''}
+                  onChange={handleChange}
+                />
 
-            <label className='popup__label-auth'>
+                <p className='popup__error-auth'>{errors.regName}</p>
+    
+              </label>
 
-              <span className='popup__span-auth'>Пароль</span>
+              <label className='popup__label-auth'>
+    
+                <span className='popup__span-auth'>E-mail</span>
 
-              <input className='popup__input-auth' required type="password" />
+                <input 
+                  className='popup__input-auth popup__input-auth_letter_spacing' 
+                  type="email"
+                  placeholder="Введите ваш e-mail"
+                  name='regEmail' 
+                  required
+                  value={values.regEmail || ''}
+                  onChange={handleChange} 
+                />
 
-            </label>
+                <p className='popup__error-auth'>{errors.regEmail}</p>
+
+              </label>
+
+              <label className='popup__label-auth'>
+
+                <span className='popup__span-auth'>Пароль</span>
+
+                <input 
+                  className='popup__input-auth'
+                  type="password" 
+                  name='regPass' 
+                  placeholder='Введите ваш пароль' 
+                  required 
+                  value={values.regPass || ''}
+                  onChange={handleChange} 
+                />
+
+                <p className='popup__error-auth'>{errors.regPass}</p>
+
+              </label>
+
+            </div>
+
+          </PopupWithForm>
+
           
-            <p className='popup__error-auth'>Что-то пошло не так...</p>
 
-          </div>
-
-        </PopupWithForm>
-
-      </section>
+        </section>
+        
+      }
 
     </main>
+    
   )
   
 }

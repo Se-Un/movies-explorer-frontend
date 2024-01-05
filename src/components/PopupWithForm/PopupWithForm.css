@@ -7,7 +7,7 @@
 
 .popup__container {
   width: 100%;
-  margin-top: 205px;
+  margin-top: 175px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,10 +25,6 @@
  color: rgba(255, 0, 76, 1);
 }
 
-.popup__error-message_display_none {
-  display: none;
-}
-
 .popup__btn:hover {
   opacity: 0.7;
   transition: opacity 0.4s;
@@ -41,10 +37,17 @@
   opacity: 0.8;
 }
 
+.popup__labels-profile {
+  width: 100%;
+  height: 107.8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .popup__label-profile {
   width: 100%;
   max-width: 450px;
-  margin-bottom: 3px;
   display: flex;
   justify-content: space-between;
 }
@@ -125,8 +128,9 @@
 
 .popup__label-auth {
   width: 100%;
+  height: 61.94px;
   max-width: 396px;
-  margin-bottom: 24px;
+  margin-bottom: 7px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -168,9 +172,9 @@
   border-bottom: 1px solid rgba(52, 86, 243, 1);
 }
 
-.popup__error-auth {
+.popup__error-auth, .popup__error-profile {
   width: 390px;
-  margin: 0;
+  margin: 5px 0 0 0;
   font-size: 10px;
   font-weight: 400;
   line-height: 12.1px;
@@ -179,7 +183,7 @@
 
 .popup__container-auth{
   width: 100%;
-  margin: 65px 0 70px 0;
+  margin: 60px 0 70px 0;
 }
 
 .popup__btn-container-auth {
@@ -226,6 +230,10 @@
   margin-top: 146px;
 }
 
+.popup__error-profile_margin_top {
+  margin-top: 3px;
+}
+
 @media screen and (min-width: 520px) and (max-width: 768px) {
   .popup__container {
     margin-top: 195px;
@@ -266,7 +274,7 @@
     font-size: 12px;
     line-height: 14.52px;
   }
-  .popup__error-auth {
+  .popup__error-auth, .popup__error-profile {
     width: 260px;
   }
   .popup__container-auth {

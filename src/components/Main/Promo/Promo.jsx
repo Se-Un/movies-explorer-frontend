@@ -1,7 +1,7 @@
 // импорт структурных файлов
 import './Promo.css';
 import NavTab from './NavTab/NavTab';
-
+// компонент Promo
 function Promo() {
   return (
     <>

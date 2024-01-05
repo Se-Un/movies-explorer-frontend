@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 // импорт структурных файлов
 import './MenuBurger.css';
 import Navigation from '../Navigation/Navigation';
-import { links } from '../../../utils/config';
+import { links } from '../../../utils/constants';
 // компонент меню бургер
 function MenuBurger(props) {
   // использовать useNavigate

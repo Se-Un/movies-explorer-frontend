@@ -1,10 +1,9 @@
-
 // импорт структурных файлов
 import './Footer.css';
-import { footerLinks } from '../../utils/config';
+import { footerLinks } from '../../utils/constants';
 // компонент footer
 function Footer() {
-
+  // отрисовка компонента Footer
   return (
 
     <footer className='footer'>

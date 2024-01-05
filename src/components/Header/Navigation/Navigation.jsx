@@ -8,13 +8,13 @@ function Navigation(props) {
  // отрисовка компонентов навигации
   return (
 
-    <div className={`nav nav__${props.name}`}>
+    <div className={`nav nav__${props.loginIn ? props.name : 'header_flex_end'}`}>
 
       {props.children}
 
       <div className={`nav__container nav__container-${props.name}`}>
         
-        <Link className={`nav__link-${props.name}_display_none ${props.loginIn ? 'nav__link_visibility_hidden' : 'nav__link'}`} to='/signup'>Регистрация</Link>
+        <Link className={`nav__link-${props.name}_display_none ${props.loginIn ? 'nav__link_display_none' : 'nav__link'}`} to='/signup'>Регистрация</Link>
         
         <button className={`nav__btn ${props.btnName}`} 
         onClick={props.nav}>

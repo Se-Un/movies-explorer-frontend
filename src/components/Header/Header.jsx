@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate} from 'react-router-dom';
 import './Header.css';
 import logotype from '../../images/logo/header-logo.svg';
 import Navigation from './Navigation/Navigation';
-import { links } from '../../utils/config';
+import { links } from '../../utils/constants';
 // компонент шапки приложения
 function Header({loggedIn, setOpenMenuBurger, location}) {
     // использовать useNavigate
@@ -39,7 +39,7 @@ function Header({loggedIn, setOpenMenuBurger, location}) {
     nav={handleNavigation}
     classBurger={classBtnBurger}
     >
-      <nav className={loggedIn ? 'nav__links-header' : 'nav__links-header_visibility_hidden'}>
+      <nav className={loggedIn ? 'nav__links-header' : 'nav__links-header_display_none'}>
         {
           links.map((link, index) => 
             <NavLink 

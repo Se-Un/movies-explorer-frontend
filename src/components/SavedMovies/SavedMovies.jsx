@@ -1,35 +1,67 @@
+// импорт зависимостей
+import { useEffect, useState } from 'react';
 // импорт структурных файлов
 import './SavedMovies.css';
 import SearchForm from '../MoviesComponents/SearchForm/SearchForm';
 import MoviesCardList from '../MoviesComponents/MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesComponents/MoviesCard/MoviesCard';
-import { images } from '../../utils/config';
+import { useSearch } from '../../hooks/Search/useSearch';
+import Preloader from '../Preloader/Preloader';
 // компонент Movies
-function Movies() {
-
+function SavedMovies(props) {
+  // переменные состояния
+  const [ savedQuery, setSavedQuery ] = useState({ string: '', duration: false, });
+  // эффект для определения страницы
+  useEffect(() => {
+    props.setPage('saved');
+  }, [props])
+  // переменная деструктуризации данных хука useSearch
+  const {filtered, submitFilterMovies, text } = useSearch(
+    props.setLoad,
+    props.saved,
+    props.message,
+    props.page
+  );
+  // отрисовка компонентов страницы SavedMovies
   return (
     <main className='saved-movies'>
 
-      <SearchForm />
+      <SearchForm
+        onSubmit={submitFilterMovies}
+        query={savedQuery}
+        setQuery={setSavedQuery}
+        setLoad={props.setLoad}
+      />
 
-      <MoviesCardList name="saved">
+      {
 
-        {
-          images.slice(0, 3).map((item, index) => 
-          <MoviesCard
-          key={index}
-          image={item}
-          name='saved'
-          title='33 слова о дизайне'
-          time='1ч42м'
-          />)
-        }
+        props.preload ? <Preloader name='preloader__main' /> :
+
+          <MoviesCardList text={text} >
+          
+            {
+            
+              filtered.map((card) => {
+                return <MoviesCard
+                  key={card._id}
+                  movie={card}
+                  image={card.image}
+                  name='saved'
+                  del={props.delete}
+                  currentMovie={props.changeBtn(props.saved, card)}
+                />
+
+              })
+
+            }
+
+          </MoviesCardList>
+
+      }  
       
-      </MoviesCardList>
-
     </main>
   )
 
 }
 
-export default Movies;
+export default SavedMovies;

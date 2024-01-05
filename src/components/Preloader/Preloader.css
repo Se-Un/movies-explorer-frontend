@@ -49,6 +49,12 @@
     padding: 20px;
 }
 
+.preloader__main {
+    height: auto;
+    align-self: center;
+    justify-self: center;
+}
+
 .preloader__container {
     width: 100px;
     height: 100px;
