@@ -23,7 +23,7 @@ function Profile (props) {
         profileEmail: currentUser.email,
       })
     }
-  }, [])
+  }, [currentUser]);
   // функция обработчик клика по Редактировать
   function handleClickEdit() {
     setSaveBtn(true);
