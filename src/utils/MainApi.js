@@ -13,7 +13,10 @@ class MainApi {
     if(res.ok) {
       return res.json();
     }
-    return Promise.reject(`Что-то пошло не так, ошибка ${res.status}, повторите запрос позже`);
+    return res.text()
+      .then((text) => {
+        throw JSON.parse(text).message || JSON.parse(text).error;
+      })
   }
   // метод регистрации пользователя
   registerUser(name, email, password) {

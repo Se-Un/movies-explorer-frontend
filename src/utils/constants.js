@@ -1,7 +1,7 @@
 // адреса апи
 export const MOVIE_URL = "https://api.nomoreparties.co";
-//export const MAIN_URL = "http://localhost:3000";
-export const MAIN_URL = "https://api.kim.diplom.nomoredomainsmonster.ru"
+export const MAIN_URL = "http://localhost:3000";
+//export const MAIN_URL = "https://api.kim.diplom.nomoredomainsmonster.ru"
 // ссылки навигации шапки и бургера
 export const links = [
   {text: 'Главная', href: '/'},
@@ -39,4 +39,3 @@ export const dataSreenSize = {
 // переменные с именем страниц для локалсторэдж
 export const localMovies = 'moviesStorage';
 export const localJwt = 'jwt';
-

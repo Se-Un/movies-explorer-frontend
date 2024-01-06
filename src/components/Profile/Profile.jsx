@@ -103,7 +103,8 @@ function Profile (props) {
                   className='popup__input-profile' 
                   type="email"
                   name='profileEmail'
-                  placeholder="e-mail" 
+                  placeholder="e-mail"
+                  pattern="[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,3}" 
                   required
                   value={values.profileEmail || ''}
                   onChange={handleChange} 

@@ -99,17 +99,14 @@ function App() {
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
-      .catch((error) => {
-
-        if(error) {
-            setMessageErr({
-              err: true,
-              message: error.message,
-            });
-
-          }
-
-      });
+      .catch((error) => {console.log(error);
+      if(error) {
+          setMessageErr({
+            err: true,
+            message: error,
+          });
+        }
+        });
 
     setTimeout(() => {
       setLoading(false);
@@ -125,10 +122,11 @@ function App() {
       })
       .catch((error) => {
 
+        console.log(error);
         if(error) {
             setMessageErr({
               err: true,
-              message: error.message,
+              message: error,
             });
 
           }
@@ -314,7 +312,7 @@ function App() {
                 onSignout={handleLogout}
                 handleProfile={handleChangeProfile}
                 load={loading}
-                message={setMessageErr} 
+                message={messageErr} 
                 />} 
               />
 
@@ -324,7 +322,7 @@ function App() {
               locate={location} 
               onRegistry={handleRegistry}
               load={loading}
-              message={setMessageErr} 
+              message={messageErr} 
               />} 
             />
             
@@ -332,7 +330,7 @@ function App() {
               locate={location} 
               onLogin={handleLogin}
               load={loading}
-              message={setMessageErr} 
+              message={messageErr} 
               />} 
             />
 

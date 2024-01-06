@@ -64,6 +64,7 @@ function Registry (props) {
                   placeholder="Введите ваш e-mail"
                   name='regEmail' 
                   required
+                  pattern="[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,3}"
                   value={values.regEmail || ''}
                   onChange={handleChange} 
                 />

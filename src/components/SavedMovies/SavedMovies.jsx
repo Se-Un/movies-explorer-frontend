@@ -16,7 +16,7 @@ function SavedMovies(props) {
     props.setPage('saved');
   }, [props])
   // переменная деструктуризации данных хука useSearch
-  const {filtered, submitFilterMovies, text } = useSearch(
+  const {filtered, submitFilterMovies, text, setText } = useSearch(
     props.setLoad,
     props.saved,
     props.message,
@@ -30,7 +30,7 @@ function SavedMovies(props) {
         onSubmit={submitFilterMovies}
         query={savedQuery}
         setQuery={setSavedQuery}
-        setLoad={props.setLoad}
+        setText={setText}
       />
 
       {

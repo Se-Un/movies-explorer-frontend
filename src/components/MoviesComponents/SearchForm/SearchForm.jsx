@@ -11,14 +11,7 @@ function SearchForm(props) {
 
     e.preventDefault();
 
-    props.setLoad(true);
-
     props.onSubmit(props.query);
-
-    setTimeout(() => {
-      props.setLoad(false);
-    }, 400)
-    
       
   }
   // отрисовка компонента страницы

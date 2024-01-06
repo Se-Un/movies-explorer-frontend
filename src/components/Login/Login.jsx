@@ -40,8 +40,9 @@ function Login (props) {
                   className='popup__input-auth popup__input-auth_letter_spacing' 
                   type="email"
                   name="logEmail" 
-                  placeholder="pochta@yandex.ru"
+                  placeholder="Введите ваш e-mail"
                   required
+                  pattern="[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,3}"
                   value={values.logEmail || ''}
                   onChange={handleChange}
                 />
@@ -57,7 +58,8 @@ function Login (props) {
                 <input 
                   className='popup__input-auth'
                   name="logPass" 
-                  type="password" 
+                  type="password"
+                  placeholder='Введите ваш пароль'
                   required
                   value={values.logPass || ''}
                   onChange={handleChange}

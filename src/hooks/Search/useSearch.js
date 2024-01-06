@@ -32,26 +32,26 @@ export function useSearch(setLoading, array, error, page) {
     };
   }, [page, array]);
   // функция обработчик отображения результата поиска
-  function submitFilterMovies(searchQuery) {
+  function submitFilterMovies(query) {
     // изменить состояние setLoading, чтобы запустить прелоудер
     setLoading(true);
     // сохранить массив отфильтрованных данных
-    const arr = filterMovies(array, searchQuery);
+    const arr = filterMovies(array, query);
     //создать задержку отображения
     setTimeout(() => {
       // изменить состояние текста ошибки, на пустое
       setText('');
       // изменить состояния переменной для хранения отфильтрованных данных массива
       setFiltered(arr);
-      //создать условие при пустом значении
-      if(searchQuery.string === '') {
-        setFiltered([]);
-        setText('Нужно ввести ключевое слово!');
-      }
       //создать условие,при получении пустого массива
       if(arr.length === 0) {
         setFiltered([]);
         setText('Ничего не найдено!')
+      }
+      //создать условие при пустом значении
+      if(!query.string) {
+        setFiltered([]);
+        setText('Нужно ввести ключевое слово!');
       }
       // создать условие при получении ошибки от апи сервера
       if(error.err) {
@@ -67,14 +67,14 @@ export function useSearch(setLoading, array, error, page) {
     // создать условие сохранения данных в локалсторэдж, на странице movies
     if(page === 'movies') {
       localStorage.setItem(localMovies, JSON.stringify({
-        string: searchQuery.string,
-        duration: searchQuery.duration,
+        string: query.string,
+        duration: query.duration,
         data: arr,
       }))
     }
     
   }
 
-  return {filtered, submitFilterMovies, text}
+  return {filtered, submitFilterMovies, text, setText}
 }
 
