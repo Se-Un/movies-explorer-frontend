@@ -13,17 +13,23 @@ function Profile (props) {
   const [ disable, setDisable ] = useState(true);
   const currentUser = useContext(CurrentUserContext);
   // деструктуризация переменных из хука валидации
-  const { values, setValues, handleChange, errors, resetForm, isValid } = useValidation();
+  const { values, setValues, handleChange, errors, resetForm, isValid, setIsValid } = useValidation();
   // эффект для подстановки действующих данных пользователя
   useEffect(() => {
     if(currentUser) {
-      setValues({
-        ...values,
-        profileName: currentUser.name,
+      setValues((values) => ({
+        ...values, 
+        profileName: currentUser.name, 
         profileEmail: currentUser.email,
-      })
+      }));
     }
-  }, [currentUser]);
+  }, [currentUser, setValues]);
+  // эффект проверки введенных данных
+  useEffect(() => {
+    if(currentUser.name === values.profileName && currentUser.email === values.profileEmail) {
+      setIsValid(false);
+    }
+  }, [currentUser, setIsValid, values])
   // функция обработчик клика по Редактировать
   function handleClickEdit() {
     setSaveBtn(true);

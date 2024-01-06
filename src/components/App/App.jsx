@@ -88,8 +88,8 @@ function App() {
       setLoggedIn(true);
     }
   }, [])
-  // функция обработчик авторизации
-  function handleLogin(email, password) {
+   // функция обработчик авторизации
+   function handleLogin(email, password) {
 
     setLoading(true);
 
@@ -98,55 +98,6 @@ function App() {
         localStorage.setItem(localJwt, 'true');
         setLoggedIn(true);
         navigate('/movies', { replace: true });
-      })
-      .catch((error) => {console.log(error);
-      if(error) {
-          setMessageErr({
-            err: true,
-            message: error,
-          });
-        }
-        });
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 400);
-  }
-  // функция обработчик регистрации
-  function handleRegistry(name, email, password) {
-    setLoading(true);
-
-    mainApi.registerUser(name, email, password)
-      .then(() => {
-        handleLogin(email, password);
-      })
-      .catch((error) => {
-
-        console.log(error);
-        if(error) {
-            setMessageErr({
-              err: true,
-              message: error,
-            });
-
-          }
-
-      });
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 400);
-  }
-  // функция обработчик выхода из аккаунта
-  function handleLogout() {
-    setLoading(true);
-
-    mainApi.logoutUser()
-      .then(() => {
-        
-        setLoggedIn(false);
-        localStorage.clear();
-        navigate('/signin', { replace: true })
       })
       .catch((error) => {
 
@@ -158,11 +109,54 @@ function App() {
 
           }
 
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }
+  // функция обработчик регистрации
+  function handleRegistry(name, email, password) {
+    setLoading(true);
+
+    mainApi.registerUser(name, email, password)
+      .then(() => {
+        handleLogin(email, password);
+      })
+      .catch((error) => {
+        if(error) {
+            setMessageErr({
+              err: true,
+              message: error,
+            });
+          }
+      })
+      .finally(() => {
+        setLoading(false)
       });
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 400);
+  }
+  // функция обработчик выхода из аккаунта
+  function handleLogout() {
+    setLoading(true);
+
+    mainApi.logoutUser()
+      .then(() => {
+        
+        setLoggedIn(false);
+        localStorage.clear();
+        navigate('/', { replace: true })
+      })
+      .catch((error) => {
+        if(error) {
+            setMessageErr({
+              err: true,
+              message: error.message,
+            });
+          }
+      })
+      .finally(() => {
+        setLoading(false)
+      });
   }
    // функция обработчик редактирования профиля
    function handleChangeProfile(data) {
@@ -174,28 +168,24 @@ function App() {
           ...currentUser,
           name: data.name,
           email: data.email,
-        })
+        });
+        alert('Данные успешно изменены!')
       })
       .catch((error) => {
-
         if(error) {
-
           setMessageErr({
-
             err: true,
             message: error.message,
-
           });
-
         }
+      })
+      .finally(() => {
+        setLoading(false)
       });
-
-      setTimeout(() => {
-        setLoading(false);
-      }, 400);
   }
   // функция обработчик сохранения фильмов
   function handleSaveMovies(dataMovie) {
+    setLoading(true);
 
     const dataSaved = {
       country: dataMovie.country,
@@ -210,7 +200,6 @@ function App() {
       nameRU: dataMovie.nameRU,
       nameEN: dataMovie.nameEN,
     }
-
     mainApi.postUserMovies(dataSaved)
       .then((items) => {
         setSaveMovies((item) => [
@@ -219,37 +208,38 @@ function App() {
         ]);
       })
       .catch((error) => {
-
         if(error) {
-
           setMessageErr({
             err: true,
             message: error.message,
           });
-
         }
+      })
+      .finally(() => {
+        setLoading(false)
       });
 
   }
   // функция обработчик удаления фильмов
   function handleRemoveMovies(card) {
 
+    setLoading(true);
+
     mainApi.removeUserMovies(card._id)
       .then(() => {
         setSaveMovies((items) => items.filter((movie) => movie._id !== card._id));
       })
       .catch((error) => {
-
         if(error) {
-
           setMessageErr({
             err: true,
             message: error.message,
           });
-
         }
-
       })
+      .finally(() => {
+        setLoading(false)
+      });
   }
   // функция обработчик на соответствие фильма
   function getSavedMovieCard(movies, card) {
@@ -281,7 +271,6 @@ function App() {
               <Route path='/movies' 
                 element={<Movies 
                   preload={loading}
-                  setLoad={setLoading}
                   array={movies}
                   message={messageErr}
                   setMessage={setMessageErr}
