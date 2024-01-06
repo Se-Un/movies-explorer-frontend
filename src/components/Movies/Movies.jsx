@@ -6,6 +6,7 @@ import SearchForm from '../MoviesComponents/SearchForm/SearchForm';
 import MoviesCardList from '../MoviesComponents/MoviesCardList/MoviesCardList';
 import MoviesCard from  '../MoviesComponents/MoviesCard/MoviesCard';
 import Button from '../Button/Button';
+import moviesApi from '../../utils/MoviesApi';
 import { useSearch } from '../../hooks/Search/useSearch';
 import Preloader from '../Preloader/Preloader';
 import useScreenSize  from '../../hooks/ScreenSize/useScreenSize';
@@ -13,6 +14,7 @@ import { dataSreenSize, localMovies, MOVIE_URL } from "../../utils/constants";
 // компонент Movies
 function Movies(props) {
   // переменные состояния
+  const [ movies, setMovies ] = useState([]);
   const [ renderCount, setRenderCount ] = useState(0);
   const [ moreRenderCount, setMoreRenderCount ] = useState(0);
   const [ searchQuery, setSearchQuery ] = useState({
@@ -21,8 +23,7 @@ function Movies(props) {
   });
   // переменная деструктуризации данных хука useSearch
   const {filtered, submitFilterMovies, text } = useSearch(
-    props.setLoad,
-    props.array,
+    movies,
     props.message,
     props.page,
     );
@@ -89,15 +90,42 @@ function Movies(props) {
   function handleClickMore() {
     setRenderCount((prev) => prev + moreRenderCount)
   }
+  // функция обработчик сабмита на странице фильмов
+  function handleSubmitMovies(query) {
+    if(movies.length === 0) {
+      props.setLoad(true);
+
+      moviesApi.getMovies()
+        .then((data) => {
+          setMovies(data);
+          submitFilterMovies(data, query);
+        })
+        .catch((error) => {
+          if(error) {
+            props.setMessage({
+              err: true,
+              message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+            });
+          }
+        })
+        .finally(() => {
+          props.setLoad(false);
+        });
+    } else {
+      submitFilterMovies(movies, query);
+    }
+  }
   // отрисовка компонентов страницы
   return (
 
     <main className='movies'>
 
       <SearchForm
-        onSubmit={submitFilterMovies}
+        onSubmit={handleSubmitMovies}
         query={searchQuery}
         setQuery={setSearchQuery}
+        duration={submitFilterMovies}
+        filter={filtered}
       />
 
       {

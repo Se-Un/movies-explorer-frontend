@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { localMovies } from "../../utils/constants";
 import { filterMovies } from "../../utils/utils";
 // хук отображения результата поиска
-export function useSearch(setLoading, array, error, page) {
+export function useSearch(array, error, page) {
   // переменные состояния
   const [ text, setText ] = useState('');
   const [ filtered, setFiltered ] = useState([]);
@@ -32,13 +32,9 @@ export function useSearch(setLoading, array, error, page) {
     };
   }, [page, array]);
   // функция обработчик отображения результата поиска
-  function submitFilterMovies(query) {
-    // изменить состояние setLoading, чтобы запустить прелоудер
-    setLoading(true);
+  function submitFilterMovies(array, query) {
     // сохранить массив отфильтрованных данных
     const arr = filterMovies(array, query);
-    //создать задержку отображения
-    setTimeout(() => {
       // изменить состояние текста ошибки, на пустое
       setText('');
       // изменить состояния переменной для хранения отфильтрованных данных массива
@@ -57,22 +53,14 @@ export function useSearch(setLoading, array, error, page) {
       if(error.err) {
         setText(error.message);
       }
-       
-    }, 800)
-    // создать задержку
-    setTimeout(() => {
-      // изменить состояние переменной Loading для прекращения работы прелоудера
-      setLoading(false);
-    }, 400);
     // создать условие сохранения данных в локалсторэдж, на странице movies
     if(page === 'movies') {
-      localStorage.setItem(localMovies, JSON.stringify({
-        string: query.string,
-        duration: query.duration,
-        data: arr,
-      }))
-    }
-    
+    localStorage.setItem(localMovies, JSON.stringify({
+      string: query.string,
+      duration: query.duration,
+      data: arr,
+    }))
+  }
   }
 
   return {filtered, submitFilterMovies, text, setText}

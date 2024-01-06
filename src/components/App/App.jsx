@@ -3,7 +3,6 @@ import { useState, useEffect, Suspense, lazy } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 // импорт структурных файлов
 import './App.css';
-import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import Preloader from '../Preloader/Preloader';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -28,7 +27,6 @@ function App() {
   const [ loggedIn, setLoggedIn ] = useState(false);
   const [ openBurgerMenu, setOpenBurgerMenu ] = useState(false);
   const [ loading, setLoading ] = useState(false);
-  const [ movies, setMovies ] = useState([]);
   const [ saveMovies, setSaveMovies ] = useState([]);
   const [ messageErr, setMessageErr ] = useState({ err: false, message: '', });
   const [ isPage, setIsPage ] = useState('');
@@ -60,22 +58,6 @@ function App() {
             }
           
         });
-
-      moviesApi.getMovies()
-        .then((data) => {
-          setMovies(data);
-        })
-        .catch((error) => {
-          if(error) {
-            setMessageErr({
-              err: true,
-              message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-            });
-
-          }
-
-        });
-      
     }
     setTimeout(() => {
       setLoading(false);
@@ -87,7 +69,7 @@ function App() {
     if(localStorage.getItem(localJwt)) {
       setLoggedIn(true);
     }
-  }, [])
+  }, []);
    // функция обработчик авторизации
    function handleLogin(email, password) {
 
@@ -104,7 +86,7 @@ function App() {
         if(error) {
             setMessageErr({
               err: true,
-              message: error.message,
+              message: error,
             });
 
           }
@@ -150,7 +132,7 @@ function App() {
         if(error) {
             setMessageErr({
               err: true,
-              message: error.message,
+              message: error,
             });
           }
       })
@@ -175,17 +157,16 @@ function App() {
         if(error) {
           setMessageErr({
             err: true,
-            message: error.message,
+            message: error,
           });
         }
       })
       .finally(() => {
-        setLoading(false)
+        setLoading(false);
       });
   }
   // функция обработчик сохранения фильмов
   function handleSaveMovies(dataMovie) {
-    setLoading(true);
 
     const dataSaved = {
       country: dataMovie.country,
@@ -209,21 +190,13 @@ function App() {
       })
       .catch((error) => {
         if(error) {
-          setMessageErr({
-            err: true,
-            message: error.message,
-          });
+         alert(error);
         }
       })
-      .finally(() => {
-        setLoading(false)
-      });
 
   }
   // функция обработчик удаления фильмов
   function handleRemoveMovies(card) {
-
-    setLoading(true);
 
     mainApi.removeUserMovies(card._id)
       .then(() => {
@@ -231,15 +204,10 @@ function App() {
       })
       .catch((error) => {
         if(error) {
-          setMessageErr({
-            err: true,
-            message: error.message,
-          });
+         alert(error);
         }
       })
-      .finally(() => {
-        setLoading(false)
-      });
+
   }
   // функция обработчик на соответствие фильма
   function getSavedMovieCard(movies, card) {
@@ -271,7 +239,7 @@ function App() {
               <Route path='/movies' 
                 element={<Movies 
                   preload={loading}
-                  array={movies}
+                  setLoad={setLoading}
                   message={messageErr}
                   setMessage={setMessageErr}
                   page={isPage}

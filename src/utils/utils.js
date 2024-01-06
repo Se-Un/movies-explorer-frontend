@@ -1,5 +1,6 @@
 // функция обработчик фильтрации
 export const filterMovies = (array, searchQuery) => {
+  console.log(searchQuery)
 
   if(searchQuery.duration) {
 

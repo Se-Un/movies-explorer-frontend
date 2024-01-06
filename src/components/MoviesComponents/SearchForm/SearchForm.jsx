@@ -1,5 +1,6 @@
 // импорт структурных файлов
 import './SearchForm.css';
+import { filterMovies } from '../../../utils/utils';
 // компонент SearchForm
 function SearchForm(props) {
   // функция обработчик изменения содержимого инпута
@@ -14,6 +15,14 @@ function SearchForm(props) {
     props.onSubmit(props.query);
       
   }
+  //
+  const handleChangeCheckbox = (e) => {
+    if (!props.query.string.trim()) {
+      return props.setQuery({ ...props.query, string: '' });
+    }
+    props.setQuery({ ...props.query, duration: e.target.checked });
+    props.onSubmit({ ...props.query, duration: e.target.checked });
+  };
   // отрисовка компонента страницы
   return (
 
@@ -48,7 +57,7 @@ function SearchForm(props) {
               className='search__toggle' 
               type="checkbox"
               checked={props.query.duration}
-              onChange={(e) => props.setQuery({ ...props.query, duration: e.target.checked})} 
+              onChange={handleChangeCheckbox} 
             />
 
             <span className='search__switch'></span>

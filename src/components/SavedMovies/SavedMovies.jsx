@@ -17,17 +17,20 @@ function SavedMovies(props) {
   }, [props])
   // переменная деструктуризации данных хука useSearch
   const {filtered, submitFilterMovies, text } = useSearch(
-    props.setLoad,
     props.saved,
     props.message,
     props.page
   );
+  //
+  function handleSubmitSaved(query) {
+    submitFilterMovies(props.saved, query);
+  } 
   // отрисовка компонентов страницы SavedMovies
   return (
     <main className='saved-movies'>
 
       <SearchForm
-        onSubmit={submitFilterMovies}
+        onSubmit={handleSubmitSaved}
         query={savedQuery}
         setQuery={setSavedQuery}
       />
