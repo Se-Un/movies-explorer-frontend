@@ -63,6 +63,6 @@ export function useSearch(array, error, page) {
   }
   }
 
-  return {filtered, submitFilterMovies, text, setText}
+  return {filtered, submitFilterMovies, text, setText, setFiltered}
 }
 

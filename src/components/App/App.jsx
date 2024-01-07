@@ -209,7 +209,7 @@ function App() {
       })
 
   }
-  // функция обработчик на соответствие фильма
+  //
   function getSavedMovieCard(movies, card) {
     return movies.find((movie) => movie.movieId === card.id);
   }
@@ -260,7 +260,7 @@ function App() {
                 page={isPage}
                 setPage={setIsPage}
                 delete={handleRemoveMovies}
-                changeBtn={getSavedMovieCard} 
+                changeBtn={getSavedMovieCard}
                 />}
               />
 

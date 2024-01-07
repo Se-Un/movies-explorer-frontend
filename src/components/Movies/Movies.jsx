@@ -124,8 +124,6 @@ function Movies(props) {
         onSubmit={handleSubmitMovies}
         query={searchQuery}
         setQuery={setSearchQuery}
-        duration={submitFilterMovies}
-        filter={filtered}
       />
 
       {

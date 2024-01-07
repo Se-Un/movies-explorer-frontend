@@ -50,7 +50,7 @@ function SavedMovies(props) {
                   image={card.image}
                   name='saved'
                   del={props.delete}
-                  currentMovie={props.changeBtn(props.saved, card)}
+                  click={props.changeBtn(props.saved, card)}
                 />
 
               })
