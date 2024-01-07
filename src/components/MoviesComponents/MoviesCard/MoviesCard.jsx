@@ -7,6 +7,7 @@ function MoviesCard(props) {
   function handleClickBtn() {
     if(props.click) {
       props.del(props.saved.filter((item) => item.movieId === props.movie.id)[0]);
+      
     } else {
       props.add(props.movie);
     }
@@ -23,6 +24,7 @@ function MoviesCard(props) {
             
             <button 
               className={props.click ? 'card__rondure card__rondure_active' : 'card__rondure'} 
+              type='button'
               onClick={handleClickBtn}
             ></button>
 
@@ -30,7 +32,7 @@ function MoviesCard(props) {
       
       )
     }
-    return <button className='card__btn-delete' onClick={handleDeleteSavedMovie}></button>
+    return <button className='card__btn-delete' type='button' onClick={handleDeleteSavedMovie}></button>
   }
   // отрисовка компонента карточки
   return (

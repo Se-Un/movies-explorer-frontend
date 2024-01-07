@@ -203,7 +203,6 @@ function App() {
          alert(error);
         }
       })
-
   }
   //
   function getSavedMovieCard(movies, card) {
