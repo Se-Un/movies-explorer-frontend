@@ -33,36 +33,26 @@ function App() {
   // эффект запроса к апи для получения первоначальных данных
   useEffect(() => {
     const token = localStorage.getItem(localJwt);
-
-    setLoading(true);
-
     if(token) {
+      setLoading(true);
 
       Promise.all([ mainApi.getUserInfo(), mainApi.getUserMovies()])
         .then(([user, save]) => {
-
           setCurrentUser(user);
-
           setSaveMovies(save);
-
         })
         .catch((error) => {
-          
             if(error) {
-
               setMessageErr({
                 err: true,
                 message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
               });
-
             }
-          
-        });
+        })
+        .finally(() => {
+          setLoading(false);
+        })
     }
-    setTimeout(() => {
-      setLoading(false);
-    }, 400);
-
   }, [loggedIn]);
   // эффект перезагрузки страницы
   useEffect(() => {
@@ -70,6 +60,12 @@ function App() {
       setLoggedIn(true);
     }
   }, []);
+  // эффект контроля перехода авторизованного пользователя
+  useEffect(() => {
+    if(loggedIn && (location.pathname === '/signup' || location.pathname === '/signin')) {
+      navigate('/movies', {replace: true});
+    }
+  }, [])
    // функция обработчик авторизации
    function handleLogin(email, password) {
 
