@@ -70,9 +70,9 @@ function Movies(props) {
       
     }
 
-    return handleCountCardsScreen();
+    handleCountCardsScreen();
 
-  }, [screenWidth, props,])
+  }, [screenWidth])
   // эффект отображения карточек из локалсторэдж
   useEffect(() => {
 
