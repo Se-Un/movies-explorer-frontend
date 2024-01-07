@@ -65,7 +65,7 @@ function App() {
     if(loggedIn && (location.pathname === '/signup' || location.pathname === '/signin')) {
       navigate('/movies', {replace: true});
     }
-  }, [])
+  }, [location, navigate, loggedIn])
    // функция обработчик авторизации
    function handleLogin(email, password) {
 
