@@ -4,7 +4,7 @@ import './SearchForm.css';
 function SearchForm(props) {
   // функция обработчик изменения содержимого инпута
   const handleChange = (e) => {
-    props.setQuery({ ...props.query, string: e.target.value })
+    props.setQuery({ ...props.query, string: e.target.value, })
   };
   // функция обработчик формы поиска
   function handleSubmit(e) {

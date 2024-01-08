@@ -62,7 +62,7 @@ function PopupWithForm(props) {
 
         <div className={`popup__container popup__container-${props.form} popup__container-${props.page}_margin_top`}>
 
-        <p className='popup__error-message'>{props.message.message}</p>
+        <p className='popup__error-message'>{props.message}</p>
 
           {
             changeBtns()

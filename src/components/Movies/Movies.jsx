@@ -21,11 +21,13 @@ function Movies(props) {
     string: '',
     duration: false,
   });
+  const [ isErr, setIsErr] = useState(false);
   // переменная деструктуризации данных хука useSearch
   const {filtered, submitFilterMovies, text } = useSearch(
     movies,
     props.message,
     props.page,
+    isErr
     );
   // переменная хранилище текущей ширины экрана
   const screenWidth = useScreenSize();
@@ -99,13 +101,13 @@ function Movies(props) {
         .then((data) => {
           setMovies(data);
           submitFilterMovies(data, query);
+          setIsErr(false);
+          props.setMessage('');
         })
         .catch((error) => {
           if(error) {
-            props.setMessage({
-              err: true,
-              message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-            });
+            setIsErr(true);
+            props.setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
           }
         })
         .finally(() => {
@@ -124,6 +126,8 @@ function Movies(props) {
         onSubmit={handleSubmitMovies}
         query={searchQuery}
         setQuery={setSearchQuery}
+        setMes={props.setMessage}
+        setErr={setIsErr}
       />
 
       {

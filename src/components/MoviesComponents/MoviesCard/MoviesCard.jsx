@@ -15,6 +15,7 @@ function MoviesCard(props) {
   // функция обработчик клика по кнопке удаления фильмов на странице сохр. фильмы
   function handleDeleteSavedMovie() {
     props.del(props.movie);
+    props.filter((items) => items.filter((movie) => movie._id !== props.movie._id))
   }
   // функция обработчик видимости кнопки
   function changeBtn() {

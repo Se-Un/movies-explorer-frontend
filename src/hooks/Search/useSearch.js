@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { localMovies } from "../../utils/constants";
 import { filterMovies } from "../../utils/utils";
 // хук отображения результата поиска
-export function useSearch(array, error, page) {
+export function useSearch(array, error, page, isErr) {
   // переменные состояния
   const [ text, setText ] = useState('');
   const [ filtered, setFiltered ] = useState([]);
@@ -28,9 +28,9 @@ export function useSearch(array, error, page) {
   // эффект отображения карточек на странице сохраненных фильмов
   useEffect(() => {
     if(page === 'saved') {
-      setFiltered(array)
+      setFiltered(array);
     };
-  }, [page, array]);
+  }, [page]);
   // функция обработчик отображения результата поиска
   function submitFilterMovies(array, query) {
     // сохранить массив отфильтрованных данных
@@ -50,8 +50,8 @@ export function useSearch(array, error, page) {
         setText('Нужно ввести ключевое слово!');
       }
       // создать условие при получении ошибки от апи сервера
-      if(error.err) {
-        setText(error.message);
+      if(isErr) {
+        setText(error);
       }
     // создать условие сохранения данных в локалсторэдж, на странице movies
     if(page === 'movies') {
@@ -63,6 +63,6 @@ export function useSearch(array, error, page) {
   }
   }
 
-  return {filtered, submitFilterMovies, text, setText, setFiltered}
+  return {filtered, setFiltered, submitFilterMovies, text, setText }
 }
 

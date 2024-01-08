@@ -28,8 +28,9 @@ function App() {
   const [ openBurgerMenu, setOpenBurgerMenu ] = useState(false);
   const [ loading, setLoading ] = useState(false);
   const [ saveMovies, setSaveMovies ] = useState([]);
-  const [ messageErr, setMessageErr ] = useState({ err: false, message: '', });
+  const [ messageErr, setMessageErr ] = useState('');
   const [ isPage, setIsPage ] = useState('');
+  const [ err, setErr ] = useState(false);
   // эффект запроса к апи для получения первоначальных данных
   useEffect(() => {
     const token = localStorage.getItem(localJwt);
@@ -40,14 +41,14 @@ function App() {
         .then(([user, save]) => {
           setCurrentUser(user);
           setSaveMovies(save);
+          setErr(false)
+          setMessageErr('')
         })
         .catch((error) => {
-            if(error) {
-              setMessageErr({
-                err: true,
-                message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-              });
-            }
+          console.log(error);
+          setErr(true)
+          setMessageErr('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+
         })
         .finally(() => {
           setLoading(false);
@@ -76,17 +77,10 @@ function App() {
         localStorage.setItem(localJwt, 'true');
         setLoggedIn(true);
         navigate('/movies', { replace: true });
+        setMessageErr('')
       })
       .catch((error) => {
-
-        if(error) {
-            setMessageErr({
-              err: true,
-              message: error,
-            });
-
-          }
-
+        setMessageErr(error);
       })
       .finally(() => {
         setLoading(false);
@@ -99,14 +93,10 @@ function App() {
     mainApi.registerUser(name, email, password)
       .then(() => {
         handleLogin(email, password);
+        setMessageErr('');
       })
       .catch((error) => {
-        if(error) {
-            setMessageErr({
-              err: true,
-              message: error,
-            });
-          }
+        setMessageErr(error);
       })
       .finally(() => {
         setLoading(false)
@@ -122,15 +112,10 @@ function App() {
         
         setLoggedIn(false);
         localStorage.clear();
-        navigate('/', { replace: true })
+        navigate('/', { replace: true });
       })
       .catch((error) => {
-        if(error) {
-            setMessageErr({
-              err: true,
-              message: error,
-            });
-          }
+        alert(error);
       })
       .finally(() => {
         setLoading(false)
@@ -147,15 +132,11 @@ function App() {
           name: data.name,
           email: data.email,
         });
+        setMessageErr('');
         alert('Данные успешно изменены!')
       })
       .catch((error) => {
-        if(error) {
-          setMessageErr({
-            err: true,
-            message: error,
-          });
-        }
+        setMessageErr(error);
       })
       .finally(() => {
         setLoading(false);
@@ -256,6 +237,7 @@ function App() {
                 setPage={setIsPage}
                 delete={handleRemoveMovies}
                 changeBtn={getSavedMovieCard}
+                isErr={err}
                 />}
               />
 

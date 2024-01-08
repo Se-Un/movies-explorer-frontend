@@ -15,7 +15,7 @@ export const filterMovies = (array, searchQuery) => {
 
     })   
   }
-
+  
   return array.filter((movie) => {
 
     if(movie.nameEN.toLowerCase().includes(searchQuery.string.toLowerCase())) {
