@@ -32,6 +32,7 @@
 .techs__items {
   width: 100%;
   margin: 100px 0 0 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +44,7 @@
   height: 38px;
   margin: 0;
   padding-top: 22px;
+  list-style-type: none;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.94px;

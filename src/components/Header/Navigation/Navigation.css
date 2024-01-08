@@ -1,8 +1,15 @@
-.nav-header {
+.nav__header {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.nav__header_flex_end {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .nav__container {
@@ -32,8 +39,8 @@
   opacity: 0.8;
 }
 
-.nav__link_visibility_hidden {
-  visibility: hidden;
+.nav__link_display_none {
+  display: none;
 }
 
 .nav__btn {
@@ -78,16 +85,16 @@
   line-height: 16px;
 }
 
-.nav-header__links {
+.nav__links-header {
   display: flex;
   gap: 17px;
 }
 
-.nav-header__links_visibility_hidden {
-  visibility: hidden;
+.nav__links-header_display_none {
+  display: none;
 }
 
-.nav-header__link {
+.nav__link-header {
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
@@ -99,23 +106,11 @@
   font-weight: 500;
 }
 
-.nav-header__link:first-child {
+.nav__link-header:first-child {
   display: none;
 }
 
-.nav-header__link:hover {
-  opacity: 0.7;
-  transition: opacity 0.4s;
-  cursor: pointer;
-}
-
-.nav-header__link:focus {
-  outline: 3px solid rgba(157, 152, 156, 1);;
-  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08);
-  opacity: 0.8;
-}
-
-.nav-header__btn-auth {
+.nav__btn-auth-header {
   width: 76px;
   height: 32px;
   padding: 0 15px 0 15px;
@@ -125,7 +120,7 @@
   color: #fff;
 }
 
-.nav-header__btn-burger {
+.nav__btn-burger-header {
   display: none;
   width: 44px;
   height: 44px;
@@ -135,20 +130,20 @@
   border-radius: 0;
 }
 
-.nav-header__btn_bg_color {
+.nav__btn-header_bg_color {
   background-color: rgba(250, 250, 250, 1);
 }
 
-.nav-burger {
+.nav__burger {
   width: 100%;
 }
 
-.nav-burger__container {
+.nav__container-burger {
   justify-content: center;
   margin: 593px 0 90px 0;
 }
 
-.nav-burger__links {
+.nav__links-burger {
   width: 100%;
   margin: 0;
   display: flex;
@@ -157,19 +152,19 @@
   justify-content: center;
 }
 
-.nav-burger__link {
+.nav__link-burger {
   margin-bottom: 28px;
   text-decoration: none;
 }
 
-.nav-burger__link_active {
+.nav__link-burger_active {
   margin-bottom: 22px;
   padding-bottom: 4px;
   text-decoration: none;
   border-bottom: 2px solid rgba(0, 0, 0, 1);
 }
 
-.nav-burger__link-text {
+.nav__link-text-burger {
   margin: 0;
   font-size: 18px;
   font-weight: 500;
@@ -178,19 +173,19 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.nav-burger__btn {
+.nav__btn-burger {
   background-color: rgba(250, 250, 250, 1);
 }
 
-.nav-burger__btn-text {
+.nav__btn-burger-text {
   font-size: 15px;
 }
 
-.nav-burger__link_display_none {
+.nav__link-burger_display_none {
   display: none;
 }
 
-.nav-burger__btn_display_none {
+.nav__btn-burger_display_none {
   display: none;
 }
 
@@ -200,30 +195,25 @@
     height: 3px;
     background-color: rgba(0, 0, 0, 1);
   }
-  .nav-header {
+  .nav__header {
     justify-content: end;
   }
-  .nav-header__links {
+  .nav__links-header{
     display: none;
-  }
-  .nav-header__links_visibility_hidden {
-    display: none;
-  }
-  
-  .nav-header__btn-burger {
+  }  
+  .nav__btn-burger-header {
     display: flex;
     gap: 7px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  
-  .nav-header__btn-burger:hover {
+  .nav__btn-burger-header:hover {
     opacity: 0.6;
     transition: opacity 0.4s;
     cursor: pointer;
   }
-  .nav-header__btn_display_none {
+  .nav__btn-header_display_none {
     display: none;
   }
 }
@@ -242,35 +232,35 @@
     width: 22px;
     height: 2.5px;
   }
-  .nav-header__btn-burger {
+  .nav__btn-header-burger {
     width: 40px;
     height: 43px;
     padding-top: 2px;
     gap: 6px;
    
   }
-  .nav-header__btn-auth {
+  .nav__btn-auth-header {
     width: 55px;
     height: 26px;
     padding: 0 13px 0 12px;
   }
-  .nav-burger__link {
+  .nav__link-burger {
     margin-bottom: 24px;
   }
-  .nav-burger__link_active {
+  .nav__link-burger_active {
     margin-bottom: 16px;
     padding-bottom: 8px;
   }
-  .nav-burger__container {
+  .nav__container-burger {
     margin: 419px 0 46px;
   }
-  .nav-burger__btn {
+  .nav__btn-burger {
     padding: 0 13px 0 10px;
   }
-  .nav-burger__btn-text {
+  .nav__btn-burger-text {
     font-size: 14px;
   }
-  .nav-burger__link:first-child {
+  .nav__link-burger:first-child {
     padding-bottom: 0;
   }
 }

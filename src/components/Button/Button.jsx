@@ -1,10 +1,17 @@
 // импорт структурных файлов
 import './Button.css';
-// компонент MoreButton
-function Button(props) {
+// компонент Button
+const Button = (props) => {
+  // отрисовка компонента Button
   return (
     <>
-      <button className={`button ${props.name}`} onClick={props.click}>{props.text}</button>
+      <button 
+        className={`button ${props.name}`} 
+        onClick={props.click}
+        disabled={!props.changeDisabled}
+      >
+        {props.text}
+      </button>
     </>
   )
 

@@ -22,8 +22,11 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.not-found__link {
+.not-found__btn {
   margin: 184px 0 60px 0;
+  padding: 0;
+  border: none;
+  background-color: #FAFAFA;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.94px;
@@ -31,13 +34,13 @@
   color: rgba(52, 86, 243, 1);
 }
 
-.not-found__link:hover {
+.not-found__btn:hover {
   opacity: 0.8;
   transition: opacity 0.4s;
   cursor: pointer;
 }
 
-.not-found__link:focus {
+.not-found__btn:focus {
   outline: 3px solid rgba(157, 152, 156, 1);;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.08);
   opacity: 0.8;
@@ -45,7 +48,7 @@
 
 @media screen and (min-width: 520px) and (max-width: 768px) {
   .not-found__title {
-    margin: 408px 0 222px 0;
+    margin: 408px 0 0 0;
   }
 }
 
@@ -60,7 +63,7 @@
     font-size: 12px;
     line-height: 14.52px;
   }
-  .not-found__link {
+  .not-found__btn {
     margin: 284px 0 30px 0;
     font-size: 12px;
     line-height: 14.52px;

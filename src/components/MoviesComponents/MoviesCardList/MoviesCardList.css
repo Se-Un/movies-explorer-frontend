@@ -1,60 +1,57 @@
 .card-list {
-  height: 994px;
-  margin: 0 auto;
+  width: 100%;
   padding-top: 70px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-list__container {
+  margin: 0 auto;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(min-content, max-content));
-  grid-template-rows: repeat(4, minmax(min-content, max-content));
+  grid-auto-rows: auto;
   align-items: center;
   justify-items: center;
   gap: 32px 20px;
 }
 
-.card__list_size_height {
-  height: 100%;
+.card-list__message {
+  max-width: 80%;
+  margin: 0;
+  grid-column: span 4/4;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  color: rgba(238, 52, 101, 1);
 }
 
-@media screen and (min-width:1280px) {
-  .card-list {
+
+@media screen and (min-width: 1280px) {
+  .card-list__container {
     width: 89%;
   }
 }
 
 @media screen and (min-width: 870px) and (max-width: 1279px) {
-  .card-list {
-    height: 999px;
+  .card-list__container {
     grid-template-columns: repeat(3, 270px);
-    grid-template-rows: repeat(6, minmax(218px));
-  }
-  .card__list_size_height {
-    height: 100%;
   }
 }
 
-@media screen and (min-width: 721px) and (max-width: 869px) {
-  .card-list {
-    height: 1172px;
+@media screen and (min-width: 720px) and (max-width: 870px) {
+  .card-list__container {
     grid-template-columns: repeat(2, minmax(min-content, max-content));
-    grid-template-rows: repeat(8, minmax(min-content, max-content));
     gap: 36px 30px;
-  }
-  .card__list_size_height {
-    height: 645px;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 720px) {
-  .card-list {
-    height: 1275px;
+  .card-list__container {
     padding-top: 40px;
     grid-template-columns: repeat(1, minmax(min-content, max-content));
-    grid-template-rows: repeat(5, minmax(min-content, max-content));
-    grid-auto-columns: 0;
     gap: 20px;
-  }
-  .card__list_size_height {
-    height: 510px;
   }
 }
 

@@ -4,10 +4,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import MenuBurger from "../Header/MenuBurger/MenuBurger";
-
 // компонент отрисовки страниц
 function AppLayout({loggedIn, location, setOpenBurgerMenu, openBurgerMenu}) {
-
+  // отрисовка компонентов AppLayout
   return (
     <>
       <Header loggedIn={loggedIn} location={location} setOpenMenuBurger={setOpenBurgerMenu} />
