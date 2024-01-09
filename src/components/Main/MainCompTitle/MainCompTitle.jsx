@@ -1,7 +1,7 @@
 // импорт структурных файлов
 import './MainCompTitle.css';
 // компонент MainCompTitle
-function MainCompTitle(props) {
+const MainCompTitle = (props) => {
 
   return (
     <>

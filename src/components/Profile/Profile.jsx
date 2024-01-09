@@ -1,71 +1,136 @@
 // импорт зависимостей
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // импорт структурных файлов
 import './Profile.css';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import { useValidation } from '../../hooks/Validation/useValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Preloader from '../Preloader/Preloader';
 // компонент Profile
 function Profile (props) {
   // переменные состояния
-  const [ saveOpen, setSaveOpen ] = useState(false);
+  const [ saveBtn, setSaveBtn ] = useState(false)
   const [ disable, setDisable ] = useState(true);
-   // функция обработчик клика по Редактировать
+  const currentUser = useContext(CurrentUserContext);
+  // деструктуризация переменных из хука валидации
+  const { values, setValues, handleChange, errors, resetForm, isValid, setIsValid } = useValidation();
+  // эффект для подстановки действующих данных пользователя
+  useEffect(() => {
+    if(currentUser) {
+      setValues((values) => ({
+        ...values, 
+        profileName: currentUser.name, 
+        profileEmail: currentUser.email,
+      }));
+    }
+  }, [currentUser, setValues]);
+  // эффект проверки введенных данных
+  useEffect(() => {
+    if(currentUser.name === values.profileName && currentUser.email === values.profileEmail) {
+      setIsValid(false);
+    }
+  }, [currentUser, setIsValid, values])
+  // функция обработчик клика по Редактировать
   function handleClickEdit() {
-     setSaveOpen(true);
-     setDisable(false);
+    setSaveBtn(true);
+    setDisable(false);
   }
+  // функция обработчик отправки формы
+  function handleSubmit(evt) {
+    evt.preventDefault();
 
+    props.handleProfile({
+      name: values.profileName,
+      email: values.profileEmail,
+    });
+    setSaveBtn(false)
+    setDisable(true);
+    resetForm();
+  }
+  // отрисовка компонентов Profile
   return (
+
     <main className='profile'>
 
-      <h1 className='profile__title'>
-        {`Привет, ${props.name}!`}
-      </h1>
+      {
+        
+        props.load ? <Preloader /> :
 
-      <PopupWithForm
-        form='profile'
-        saveBtnOpen={saveOpen}
-        click={handleClickEdit}
-        path={props.locate}
-        save='Сохранить'
-        edit='Редактировать'
-        logout='Выйти из системы'
-      >
+        <section className='profile__section'>
 
-        <label className='popup__label-profile'>
+          <h1 className='profile__title'>
+            {`Привет, ${currentUser.name}!`}
+          </h1>
 
-          <span className='popup__span-profile'>Имя</span>
+          <PopupWithForm
+            form='profile'
+            click={handleClickEdit}
+            saveBtnOpen={saveBtn}
+            path={props.locate}
+            save='Сохранить'
+            edit='Редактировать'
+            logout='Выйти из аккаунта'
+            signoutBtn={props.onSignout}
+            valid={isValid}
+            onSubmit={handleSubmit}
+            message={props.message}
+          >
 
-          <input 
-            className='popup__input-profile' 
-            type="text" 
-            placeholder='Виталий' 
-            minLength="2" 
-            maxLength="30" 
-            required 
-            disabled={disable} 
-          />
+            <div className='popup__labels-profile'>
+            
+              <label className='popup__label-profile'>
+              
+                <span className='popup__span-profile'>Имя</span>
+              
+                <input 
+                  className='popup__input-profile' 
+                  type="text"
+                  name='profileName' 
+                  placeholder='Имя' 
+                  minLength={2} 
+                  maxLength={30}
+                  required
+                  value={values.profileName || ''}
+                  onChange={handleChange}
+                  disabled={disable} 
+                />
 
-        </label>
+              </label>
 
-        <div className='popup__line-profile'></div>
+              <p className='popup__error-profile popup__error-profile_margin_top'>{errors.profileName}</p>
 
-        <label className='popup__label-profile popup__label-profile_margin_top'>
+              <div className='popup__line-profile'></div>
 
-          <span className='popup__span-profile'>E-mail</span>
+              <label className='popup__label-profile popup__label-profile_margin_top'>
 
-          <input 
-            className='popup__input-profile' 
-            type="email"
-            placeholder="pochta@yandex.ru" 
-            required 
-            disabled={disable} 
-          />
+                <span className='popup__span-profile'>E-mail</span>
 
-        </label>
+                <input 
+                  className='popup__input-profile' 
+                  type="email"
+                  name='profileEmail'
+                  placeholder="e-mail"
+                  pattern="[a-z0-9]+@[a-z0-9]+\.[a-z0-9]{2,3}" 
+                  required
+                  value={values.profileEmail || ''}
+                  onChange={handleChange} 
+                  disabled={disable} 
+                />
 
-      </PopupWithForm>
+              </label>
 
-  </main>
+              <p className='popup__error-profile'>{errors.profileEmail}</p>
+
+            </div>
+
+          </PopupWithForm>
+
+        </section>
+
+      }
+
+    </main>
+
   )
   
 }

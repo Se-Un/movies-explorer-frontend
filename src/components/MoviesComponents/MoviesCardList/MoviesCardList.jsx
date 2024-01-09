@@ -5,11 +5,17 @@ function MoviesCardList(props) {
 
   return (
 
-    <section className={`card-list ${props.name === 'saved' ? 'card__list_size_height' : ''}`}>
+    <section className='card-list'>
+      
+      <p className='card-list__message'>{props.text}</p>
 
-      {
-        props.children
-      }
+      <ul className='card-list__container'>
+
+        {
+          props.children
+        }
+
+      </ul>
 
     </section>
 

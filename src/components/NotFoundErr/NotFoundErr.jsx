@@ -1,9 +1,11 @@
 // импорт зависимостей
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // импорт структурных файлов
 import './NotFoundErr.css';
 // компонент NotFoundErr
 function NotFoundErr() {
+  // переменная навигации
+  const navigate = useNavigate();
 
   return (
     <main className='not-found'>
@@ -12,7 +14,7 @@ function NotFoundErr() {
       
       <p className='not-found__text'>Страница не найдена</p>
 
-      <Link className='not-found__link' to='/'>Назад</Link>
+      <button className='not-found__btn' type='button' onClick={() => {navigate(-1)}}>Назад</button>
 
     </main>
   )
