@@ -4,7 +4,7 @@
 * Цель
 * Используемые технологии
 * Функциональность
-* Ссылки
+* Скриншоты
 * Инструкция по установке 
 * Итог
 
@@ -27,9 +27,12 @@
 5. Хранение данных в localStorage
 6. Подключение домменых имен
 7. Деплой на Виртуальную Машину
-## Ссылки 
-1. [Ссылка на пул реквест](https://github.com/Se-Un/movies-explorer-frontend/pull/16)
-2. [Ссылка на проект на ВМ:](https://kim.diplom.nomoredomainsmonster.ru/)
+## Скриншоты
+![alt text](./readme-screen/image.png)
+![alt text](./readme-screen/image2.png)
+![alt text](./readme-screen/image3.png)
+![alt text](./readme-screen/image4.png)
+![alt text](./readme-screen/image-1.png)
 ## Инструкция по установке
 1. Клонировать репозиторий: https://github.com/Se-Un/movies-explorer-frontend
 2. Установить зависимости проекта командой: npm ci либо npm install

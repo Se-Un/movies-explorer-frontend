@@ -33,8 +33,8 @@ function App() {
   const [ err, setErr ] = useState(false);
   // эффект запроса к апи для получения первоначальных данных
   useEffect(() => {
-    const token = localStorage.getItem(localJwt);
-    if(token) {
+    //const token = localStorage.getItem(localJwt);
+    //if(token) {
       setLoading(true);
 
       Promise.all([ mainApi.getUserInfo(), mainApi.getUserMovies()])
@@ -53,14 +53,14 @@ function App() {
         .finally(() => {
           setLoading(false);
         })
-    }
+    //}
   }, [loggedIn]);
   // эффект перезагрузки страницы
-  useEffect(() => {
-    if(localStorage.getItem(localJwt)) {
-      setLoggedIn(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(localStorage.getItem(localJwt)) {
+  //     setLoggedIn(true);
+  //   }
+  // }, []);
   // эффект контроля перехода авторизованного пользователя
   useEffect(() => {
     if(loggedIn && (location.pathname === '/signup' || location.pathname === '/signin')) {

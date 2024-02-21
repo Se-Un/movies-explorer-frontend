@@ -1,6 +1,6 @@
 // импорт структурных файлов
 import './AboutMe.css';
-import photo from '../../../images/student-foto.png';
+import photo from '../../../images/me.jpeg';
 import MainCompTitle from '../MainCompTitle/MainCompTitle';
 import Portfolio from '../Portfolio/Portfolio';
 // компонент AboutMe
@@ -16,13 +16,11 @@ function AboutMe() {
 
         <div className='about-me__content'>
 
-          <h3 className='about-me__title'>Виталий</h3>
+          <h3 className='about-me__title'>Kim Se-Un</h3>
 
-          <p className='about-me__prof-age'>Фронтенд-разработчик, 30 лет</p>
+          <p className='about-me__prof-age'>Фронтенд-разработчик, 29 лет</p>
 
-          <p className='about-me__description'>Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена 
-            и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того,
-            как прошёл курс по  веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+          <p className='about-me__description'>Я  живу в Санкт-Петербурге, закончил факультет экономики РГГМУ. Я люблю слушать музыку, а ещё увлекаюсь компьютерными играми. В настоящее время изучаю вэб разработку.
           </p>
 
           <a className='about-me__link' href='https://github.com/Se-Un' target='blank'>Github</a>
